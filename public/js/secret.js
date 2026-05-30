@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const finishModal = document.getElementById("finish-modal");
   const restartBtn = document.getElementById("restart-btn");
 
-  const sfxCorrect = new Audio("assets/sounds/ting.mp3");
-  const sfxWrong = new Audio("assets/sounds/wrong.mp3");
+  const sfxCorrect = new Audio("/sounds/ting.mp3");
+  const sfxWrong = new Audio("/sounds/wrong.mp3");
 
   function shuffleQuestions(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       answerInput.disabled = true;
       guessBtn.disabled = true;
 
-      animalImg.src = `assets/images/${currentData.img}`;
+      animalImg.src = `/images/${currentData.img}`;
       animalName.textContent = currentData.nameDisplay;
       resultCard.classList.remove("hidden");
 

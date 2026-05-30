@@ -18,6 +18,22 @@
   user-select: none;
   font-family: var(--font-kids);
 }
+/* Thiết lập layout cho trang Vận dụng khi tích hợp Header */
+body.vandung-page {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Đẩy container chính của trang vận dụng xuống dưới thanh Header */
+body.vandung-page .game-container {
+  margin-top: 100px !important; /* Tạo khoảng trống né Header mượt mà */
+  align-self: center;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 body {
   background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
@@ -98,6 +114,7 @@ header .sub-title {
   font-weight: 700;
   font-size: 1.1rem;
   box-shadow: 0 4px 0 var(--border-dark);
+  z-index: 5;
 }
 
 .bg-green {
@@ -146,6 +163,49 @@ header .sub-title {
   box-shadow: 0 2px 0 var(--border-dark);
 }
 
+/* KHU VỰC NHẬP HÀNG NGANG (TÊN BÉ & TÊN THÚ) */
+.teacher-input-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kids-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--border-dark);
+}
+
+#student-name,
+#pet-name {
+  width: 100%;
+  padding: 15px;
+  border-radius: 20px;
+  border: 4px solid var(--border-dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+  outline: none;
+  background: #fffdf0;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+#student-name:focus,
+#pet-name:focus {
+  background: #ffffff;
+  border-color: #e67e22;
+  box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
+}
+
+/* KHU VỰC NHẬP THÓI QUEN VÀ NÚT GHIM */
 .input-group {
   display: flex;
   gap: 15px;
@@ -188,6 +248,7 @@ header .sub-title {
   box-shadow: 0 2px 0 var(--border-dark);
 }
 
+/* BẢNG TRẮNG ĐỂ GHIM NOTE */
 .whiteboard-zone {
   background: #10ac84;
   border: 8px solid #ee5253;
@@ -274,6 +335,44 @@ header .sub-title {
   }
 }
 
+/* LƯỚI CHỌN CON VẬT (12 Ô) */
+.grid-12 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px !important;
+  margin: 15px 0 !important;
+}
+
+/* NÚT CHUYỂN BƯỚC */
+#go-to-step-2-btn {
+  background: var(--banana-yellow);
+  color: var(--border-dark);
+  border: 4px solid var(--border-dark);
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--border-dark);
+  animation: pulseBtn 1.5s infinite alternate;
+  transition: all 0.1s;
+}
+
+#go-to-step-2-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--border-dark);
+}
+
+@keyframes pulseBtn {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.04);
+  }
+}
+
+/* GRID ĐÁP ÁN TRẮC NGHIỆM STEP 2 */
 .actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -328,6 +427,7 @@ header .sub-title {
   }
 }
 
+/* THANH TIẾN TRÌNH LOVE BAR */
 .love-bar-container {
   display: flex;
   align-items: center;
@@ -360,6 +460,7 @@ header .sub-title {
   background-color: #ffeef0 !important;
 }
 
+/* MODAL CHIẾN THẮNG */
 .modal {
   position: fixed;
   top: 0;
@@ -453,122 +554,187 @@ header .sub-title {
   display: none !important;
 }
 
-.teacher-input-row {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-.input-field {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.kids-label {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--border-dark);
-}
-
-#student-name {
-  padding: 15px;
-  border-radius: 20px;
-  border: 4px solid var(--border-dark);
-  font-size: 1.2rem;
-  font-weight: 600;
-  outline: none;
-  background: #fffdf0;
-}
-
-.grid-12 {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px !important;
-  margin: 15px 0 !important;
-}
-
+/* ==========================================================================
+   PHẦN BỔ SUNG: TOÀN BỘ RESPONSIVE CHO ĐIỆN THOẠI (MAX-WIDTH: 600PX)
+   ========================================================================== */
 @media (max-width: 600px) {
+  body {
+    padding: 15px 10px; /* Thu hẹp viền ngoài cùng */
+  }
+
+  .game-container {
+    padding: 25px 15px; /* Giảm padding của container lớn để lấy thêm không gian */
+    border-radius: 30px;
+    border-width: 5px;
+    box-shadow:
+      0 12px 0 var(--border-dark),
+      0 20px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Thu nhỏ tiêu đề h1 không lo bị gãy nát chữ */
+  header h1 {
+    font-size: 1.9rem;
+    text-shadow:
+      2px 2px 0px var(--banana-yellow),
+      4px 4px 0px var(--border-dark);
+    margin-bottom: 5px;
+  }
+
+  header .sub-title {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+  }
+
+  /* Tối ưu hóa các thẻ chứa (Card) */
+  .card {
+    padding: 40px 15px 20px 15px; /* Tăng padding-top lên 40px để tránh mác cài đè lên chữ */
+    border-radius: 25px;
+    margin-bottom: 25px;
+    border-width: 4px;
+    box-shadow: 0 7px 0 var(--border-dark);
+  }
+
+  /* Thu nhỏ cái Badge (mác tiêu đề bước) */
+  .badge {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    top: -16px;
+    left: 15px;
+    border-width: 3px;
+  }
+
+  .speech-p {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  /* Xếp dọc ô nhập tên học sinh và tên con vật */
+  .teacher-input-row {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .kids-label {
+    font-size: 1.05rem;
+  }
+
+  #student-name,
+  #pet-name {
+    padding: 12px;
+    font-size: 1.05rem;
+    border-radius: 16px;
+    border-width: 3px;
+  }
+
+  /* Lưới 12 ô chọn con vật: Đưa về 2 cột cân đối */
   .grid-12 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
   }
-}
 
-#go-to-step-2-btn {
-  background: var(--banana-yellow);
-  color: var(--border-dark);
-  border: 4px solid var(--border-dark);
-  padding: 15px 30px;
-  border-radius: 25px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 6px 0 var(--border-dark);
-  animation: pulseBtn 1.5s infinite alternate;
-  transition: all 0.1s;
-}
-
-#go-to-step-2-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 var(--border-dark);
-}
-
-@keyframes pulseBtn {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.04);
-  }
-}
-
-@media (max-width: 650px) {
-  .teacher-input-row {
+  /* XẾP DỌC ô nhập thói quen và nút bấm để không bị bóp méo */
+  .input-group {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 15px;
   }
-}
 
-#student-name,
-#pet-name {
-  width: 100%;
-  padding: 15px;
-  border-radius: 20px;
-  border: 4px solid var(--border-dark, #2c3e50);
-  font-size: 1.2rem;
-  font-weight: 600;
-  outline: none;
-  background: #fffdf0;
-  box-sizing: border-box;
-  font-family: "Fredoka", sans-serif;
-  transition: all 0.2s ease;
-}
+  #pet-habit {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    border-radius: 18px;
+    border-width: 3px;
+  }
 
-#student-name:focus,
-#pet-name:focus {
-  background: #ffffff;
-  border-color: #e67e22;
-  box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
-}
+  #add-to-board-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border-radius: 18px;
+    border-width: 3px;
+    box-shadow: 0 5px 0 var(--border-dark);
+  }
 
-.teacher-input-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-  width: 100%;
-}
+  /* Khu vực bảng ghim */
+  .whiteboard-zone {
+    padding: 15px 10px;
+    border-radius: 25px;
+    border-width: 5px;
+  }
 
-.input-field {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  .whiteboard-zone h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+  }
 
-@media (max-width: 650px) {
-  .teacher-input-row {
+  /* Thẻ Sticky note ghim trên bảng tự động vừa màn hình điện thoại */
+  .sticky-note {
+    width: 100%;
+    max-width: 260px;
+    padding: 14px;
+  }
+
+  .sticky-note .note-head {
+    font-size: 2rem;
+  }
+
+  .sticky-note .note-body {
+    font-size: 1rem;
+  }
+
+  /* Xếp dọc các nút trắc nghiệm ở bước 2 giúp các bé dễ tương tác */
+  .actions-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .action-btn {
+    padding: 14px 15px;
+    font-size: 1.05rem;
+    border-radius: 18px;
+    border-width: 3px;
+    box-shadow: 0 5px 0 var(--border-dark);
+  }
+
+  /* Căn chỉnh lại Love Bar */
+  .love-bar-container {
+    font-size: 1.1rem;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .love-bar {
+    width: 100%;
+    height: 20px;
+    border-width: 3px;
+  }
+
+  /* Modal thông báo */
+  .modal-content {
+    padding: 30px 20px;
+    border-radius: 30px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.7rem;
+  }
+
+  .modal-content p {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .final-stickers {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .modal-content button {
+    padding: 12px 30px;
+    font-size: 1.15rem;
+    border-radius: 18px;
   }
 }

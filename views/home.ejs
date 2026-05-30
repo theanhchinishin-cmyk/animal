@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Chủ: Ai Là Vua Động Vật?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Montserrat:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/style/home.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <%- include('partials/header') %>
+
+      <main class="content-wrapper">
+        <section id="ly-thuyet" class="web-section active">
+          <div class="section-title">
+            <span class="badge">Phần 1</span>
+            <h2>Bài Giảng Lý Thuyết</h2>
+          </div>
+
+          <div class="slide-container" id="slideContainer">
+            <button class="fullscreen-btn" id="goFullscreen">
+              <i class="fa-solid fa-expand"></i> Xem Toàn Màn Hình
+            </button>
+            <iframe
+              class="slide-iframe"
+              id="slideIframe"
+              src="https://husteduvn-my.sharepoint.com/personal/quang_tt2411991_sis_hust_edu_vn/_layouts/15/embed.aspx?UniqueId=dc72f3c1-860c-4f39-a772-40c5f4ff2da3"
+              allowfullscreen="true"
+              webkitallowfullscreen="true"
+              mozallowfullscreen="true"
+            >
+            </iframe>
+          </div>
+        </section>
+
+        <section id="hoat-dong" class="web-section">
+          <div class="section-title">
+            <span class="badge orange">Phần 2</span>
+            <h2>Các Hoạt Động Trải Nghiệm</h2>
+          </div>
+
+          <div class="activity-grid">
+            <a href="/index" class="card-link">
+              <div class="card-icon">
+                <i class="fa-solid fa-volume-high"></i>
+              </div>
+              <div class="card-body">
+                <h3>Hoạt động 1</h3>
+                <p>Nghe tiếng kêu - Đoán tên con vật phát ra âm thanh.</p>
+              </div>
+              <span class="card-btn"
+                >Vào chơi <i class="fa-solid fa-chevron-right"></i
+              ></span>
+            </a>
+
+            <a href="/e" class="card-link">
+              <div class="card-icon"><i class="fa-solid fa-eye"></i></div>
+              <div class="card-body">
+                <h3>Hoạt động 2</h3>
+                <p>
+                  Giúp các bạn động vật tìm đường về đúng ngôi nhà của mình.
+                </p>
+              </div>
+              <span class="card-btn"
+                >Vào chơi <i class="fa-solid fa-chevron-right"></i
+              ></span>
+            </a>
+
+            <a href="/secret" class="card-link">
+              <div class="card-icon">
+                <i class="fa-solid fa-house-chimney"></i>
+              </div>
+              <div class="card-body">
+                <h3>Hoạt động 3</h3>
+                <p>Dựa vào đặc điểm, hãy đoán tên con vật đó</p>
+              </div>
+              <span class="card-btn"
+                >Vào chơi <i class="fa-solid fa-chevron-right"></i
+              ></span>
+            </a>
+
+            <a href="/4" class="card-link">
+              <div class="card-icon"><i class="fa-solid fa-crown"></i></div>
+              <div class="card-body">
+                <h3>Hoạt động 4</h3>
+                <p>Vận dụng</p>
+              </div>
+              <span class="card-btn"
+                >Vào chơi <i class="fa-solid fa-chevron-right"></i
+              ></span>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/js/home.js"></script>
+  </body>
+</html>

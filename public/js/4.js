@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const loveProgress = document.getElementById("love-progress");
   const celebrateModal = document.getElementById("celebrate-modal");
 
-  const sfxCorrect = new Audio("assets/sounds/wow.mp3");
-  const sfxWrong = new Audio("assets/sounds/wrong.mp3");
+  const sfxCorrect = new Audio("/sounds/wow.mp3");
+  const sfxWrong = new Audio("/sounds/wrong.mp3");
 
   emojiOpts.forEach((opt) => {
     opt.addEventListener("click", function () {

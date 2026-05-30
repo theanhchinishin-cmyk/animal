@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("victory-modal");
   const replayBtn = document.getElementById("replay-btn");
 
-  const sfxCorrect = new Audio("assets/sounds/ting.mp3");
-  const sfxWrong = new Audio("assets/sounds/wrong.mp3");
+  const sfxCorrect = new Audio("/sounds/ting.mp3");
+  const sfxWrong = new Audio("/sounds/wrong.mp3");
 
   function initGame() {
     pool.innerHTML = "";
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.dataset.env = animal.env;
 
       card.innerHTML = `
-                <img src="assets/images/${animal.img}" alt="${animal.name}">
+                <img src="/images/${animal.img}" alt="${animal.name}">
                 <span>${animal.name}</span>
             `;
 

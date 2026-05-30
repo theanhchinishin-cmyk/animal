@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalAnimalName = document.getElementById("modal-animal-name");
 
   const audioPlayer = new Audio();
-  const sfxCorrect = new Audio("assets/sounds/ting.mp3");
-  const sfxWrong = new Audio("assets/sounds/wrong.mp3");
+  const sfxCorrect = new Audio("/sounds/ting.mp3");
+  const sfxWrong = new Audio("/sounds/wrong.mp3");
 
   function initGame() {
     isGameOver = false;
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const randomIndex = Math.floor(Math.random() * remainingAnimals.length);
     currentCorrectAnimal = remainingAnimals[randomIndex];
 
-    audioPlayer.src = `assets/sounds/${currentCorrectAnimal.sound}`;
+    audioPlayer.src = `/sounds/${currentCorrectAnimal.sound}`;
 
     const shuffledAnimals = [...remainingAnimals];
     for (let i = shuffledAnimals.length - 1; i > 0; i--) {
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.dataset.id = animal.id;
 
       card.innerHTML = `
-                <img src="assets/images/${animal.img}" alt="${animal.name}" class="animal-img">
+                <img src="/images/${animal.img}" alt="${animal.name}" class="animal-img">
                 <span>${animal.name}</span>
             `;
       grid.appendChild(card);
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showSuccessModal(animal) {
     modalAnimalName.textContent = animal.name;
     modalFact.textContent = animal.fact;
-    modalImg.src = `assets/images/${animal.img}`;
+    modalImg.src = `images/${animal.img}`;
     modalImg.alt = animal.name;
 
     if (remainingAnimals.length === 0) {

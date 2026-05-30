@@ -17,6 +17,20 @@
   outline: none;
 }
 
+/* Khoảng cách biệt lập cho trang game khi có Header */
+body.game-page-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Đẩy khung game dịch xuống dưới thanh Header */
+body.game-page-wrapper .main-container {
+  margin-top: 100px !important; /* Khoảng cách vừa xinh né Header */
+  align-self: center;
+}
 body {
   font-family: var(--font-family);
   background-color: var(--bg-color);
