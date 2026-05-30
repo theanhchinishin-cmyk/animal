@@ -1,0 +1,254 @@
+:root {
+  --bg-color: #f7f1e3;
+  --font-family: "Nunito", sans-serif;
+  --transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  background-image:
+    radial-gradient(#ffbe0b 1.5px, transparent 1.5px),
+    radial-gradient(#ff007f 1.5px, #f7f1e3 1.5px);
+  background-size: 30px 30px;
+  background-position:
+    0 0,
+    15px 15px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ff007f;
+  text-shadow: 3px 3px 0px #ffbe0b;
+  margin-bottom: 8px;
+}
+
+header p {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4b4b4b;
+}
+
+.animals-pool {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 30px;
+  border: 4px dashed #ff9f43;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  min-height: 230px;
+  margin-bottom: 35px;
+  box-shadow:
+    0 10px 0 #ff9f43,
+    0 15px 25px rgba(0, 0, 0, 0.05);
+}
+
+.animal-card {
+  background: #ffffff;
+  border: 4px solid #cbd5e1;
+  border-radius: 28px;
+  padding: 15px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  box-shadow: 0 8px 0 #cbd5e1;
+  transition: var(--transition);
+}
+
+.animal-card:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+.animal-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  pointer-events: none;
+}
+
+.animal-card span {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #2c3e50;
+}
+
+.environments-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.zone {
+  background: #ffffff;
+  border-radius: 35px;
+  overflow: hidden;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid #cbd5e1;
+  box-shadow:
+    0 12px 0 #cbd5e1,
+    0 20px 30px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.zone-header {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  padding: 15px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
+}
+.land-title {
+  background-color: #4cd137;
+}
+.water-title {
+  background-color: #00a8ff;
+}
+.soil-title {
+  background-color: #e67e22;
+}
+
+.zone-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-content: flex-start;
+  background-color: #f8fafc;
+  transition: background-color 0.2s ease;
+}
+
+.zone.drag-over {
+  transform: scale(1.03);
+  border-color: #ffbe0b;
+  box-shadow:
+    0 12px 0 #ffbe0b,
+    0 0 30px rgba(255, 190, 11, 0.4);
+}
+.zone.drag-over .zone-content {
+  background-color: #fef08a;
+}
+
+.wrong-shake {
+  animation: shake 0.4s ease-in-out !important;
+  border-color: #ff4d4d !important;
+  box-shadow:
+    0 6px 0 #ff4d4d,
+    0 0 20px rgba(255, 77, 77, 0.5) !important;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15%,
+  45%,
+  75% {
+    transform: translateX(-12px);
+  }
+  30%,
+  60%,
+  90% {
+    transform: translateX(12px);
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #ffffff;
+  border: 6px solid #4cd137;
+  padding: 40px;
+  border-radius: 40px;
+  text-align: center;
+  box-shadow:
+    0 15px 0 #3bad29,
+    0 25px 40px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+  transform: scale(0.8);
+  transition: var(--transition);
+}
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-content h2 {
+  color: #ff9f43;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 0px #ffbe0b;
+}
+.modal-content p {
+  font-size: 1.3rem;
+  color: #57606f;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+#replay-btn {
+  padding: 15px 40px;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff007f, #ff5252);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #b30059;
+  transition: var(--transition);
+}
+#replay-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #b30059;
+}

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vận Dụng</title>
+    <link rel="stylesheet" href="public/style/4.css" />
+    <link
+      href="https:
+
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="game-container max-w-large">
+      <header>
+        <h1>🏡 GÓC YÊU THƯƠNG ĐỘNG VẬT 🏡</h1>
+        <p class="sub-title">
+          Cả lớp cùng nhập câu trả lời để ghim lên bảng lớp mình nhé!
+        </p>
+      </header>
+
+      <div id="step-1-box" class="card">
+        <div class="badge">BƯỚC 1: TẠO BỘ SƯU TẬP CỦA LỚP</div>
+
+        <div class="teacher-input-row">
+          <div class="input-field">
+            <label class="kids-label">👤 Tên của bạn nhỏ:</label>
+            <input
+              type="text"
+              id="student-name"
+              placeholder="Ví dụ: Bảo Anh, Minh Anh,..."
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="input-field">
+            <label class="kids-label">📛 Tên của con vật:</label>
+            <input
+              type="text"
+              id="pet-name"
+              placeholder="Ví dụ: Miu Miu, Công Thắng,..."
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <label
+          class="kids-label"
+          style="display: block; margin-top: 15px; text-align: center"
+          >🐾 Chọn con vật nhà bạn ấy nuôi (hoặc hay gặp):</label
+        >
+        <div class="emoji-selector grid-12">
+          <span class="emoji-opt active" data-emoji="🐱">🐱 Mèo</span>
+          <span class="emoji-opt" data-emoji="🐶">🐶 Chó</span>
+          <span class="emoji-opt" data-emoji="🐦">🐦 Chim</span>
+          <span class="emoji-opt" data-emoji="🐟">🐟 Cá</span>
+          <span class="emoji-opt" data-emoji="🐰">🐰 Thỏ</span>
+          <span class="emoji-opt" data-emoji="🐓">🐓 Gà</span>
+          <span class="emoji-opt" data-emoji="🦆">🦆 Vịt</span>
+          <span class="emoji-opt" data-emoji="🐹">🐹 Chuột</span>
+          <span class="emoji-opt" data-emoji="🐢">🐢 Rùa</span>
+          <span class="emoji-opt" data-emoji="🐷">🐷 Lợn</span>
+          <span class="emoji-opt" data-emoji="🐮">🐮 Bò</span>
+          <span class="emoji-opt" data-emoji="🐑">🐑 Cừu</span>
+        </div>
+
+        <div class="input-group" style="margin-top: 25px">
+          <input
+            type="text"
+            id="pet-habit"
+            placeholder="Điều thú vị? (Ví dụ: rất thích ăn cá, hót reo vui...)"
+            autocomplete="off"
+          />
+          <button id="add-to-board-btn">GHIM LÊN BẢNG 📌</button>
+        </div>
+      </div>
+
+      <div class="whiteboard-zone">
+        <h3>📌 BỘ SƯU TẬP CON VẬT CỦA LỚP MÌNH 📌</h3>
+        <div id="whiteboard-content" class="whiteboard-content">
+          <p class="empty-text">
+            Đang đợi câu trả lời của các bạn nhỏ lên đây...
+          </p>
+        </div>
+
+        <div
+          class="center-btn-box"
+          style="margin-top: 25px; text-align: center"
+        >
+          <button id="go-to-step-2-btn" class="hidden">
+            HỌC CÁCH CHĂM SÓC THÚ CƯNG NÀOO ➡️
+          </button>
+        </div>
+      </div>
+
+      <div id="step-2-box" class="card attitude-card hidden">
+        <div class="badge bg-green">BƯỚC 2: BÉ CHĂM SÓC ĐỘNG VẬT</div>
+        <p class="speech-p">
+          Để chăm sóc và bảo vệ các bạn ấy, lớp mình sẽ chọn việc nào ĐÚNG?
+        </p>
+
+        <div class="actions-grid">
+          <button class="action-btn correct" data-score="1">
+            🍖 Cho thú cưng ăn đầy đủ
+          </button>
+          <button class="action-btn wrong">
+            💥 Đuổi bắt, ném đá các chú chim
+          </button>
+          <button class="action-btn correct" data-score="1">
+            🧼 Tắm rửa sạch sẽ cho thú nuôi
+          </button>
+          <button class="action-btn wrong">
+            😿 Trêu chọc khi con vật đang ngủ
+          </button>
+        </div>
+
+        <div class="love-bar-container">
+          <span>💖 Thanh Yêu Thương:</span>
+          <div class="love-bar">
+            <div id="love-progress" class="love-progress"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="celebrate-modal" class="modal">
+      <div class="modal-content">
+        <h2>❤️ BÉ CÓ TRÁI TIM THẬT ẤM ÁP ❤️</h2>
+        <p>
+          Cả lớp mình đã hoàn thành xuất sắc bài học hôm nay rồi. Cô khen cả
+          lớp!
+        </p>
+        <div class="final-stickers">🍀 ❤️ 🌟</div>
+        <button onclick="location.reload()">Chơi lại từ đầu nha cô</button>
+      </div>
+    </div>
+
+    <script src="public/js/4.js"></script>
+  </body>
+</html>

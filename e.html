@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bé Tìm Nhà Cho Thú - Game Kéo Thả</title>
+    <link rel="stylesheet" href="public/style/e.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="game-container">
+      <header>
+        <h1>🌍 BÉ TÌM NHÀ CHO THÚ 🌍</h1>
+        <p>Bé hãy kéo các con vật thả vào đúng ngôi nhà của chúng nhé!</p>
+      </header>
+
+      <div id="animals-pool" class="animals-pool"></div>
+
+      <div class="environments-container">
+        <div class="zone" data-env="land" id="zone-land">
+          <div class="zone-header land-title">🌳 TRÊN CẠN</div>
+          <div class="zone-content" id="content-land"></div>
+        </div>
+
+        <div class="zone" data-env="water" id="zone-water">
+          <div class="zone-header water-title">🌊 DƯỚI NƯỚC</div>
+          <div class="zone-content" id="content-water"></div>
+        </div>
+
+        <div class="zone" data-env="soil" id="zone-soil">
+          <div class="zone-header soil-title">🌱 TRONG ĐẤT</div>
+          <div class="zone-content" id="content-soil"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="victory-modal" class="modal">
+      <div class="modal-content">
+        <h2>👑 BÉ QUÁ XUẤT SẮC! 👑</h2>
+        <p>
+          Bé đã giúp tất cả các bạn nhỏ tìm được ngôi nhà hạnh phúc của mình
+          rồi!
+        </p>
+        <button id="replay-btn">Chơi lại từ đầu nha</button>
+      </div>
+    </div>
+
+    <script src="public/js/e.js"></script>
+  </body>
+</html>

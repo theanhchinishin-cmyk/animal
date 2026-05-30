@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game: Nghe Tiếng Đoán Con Vật!</title>
+    <link rel="stylesheet" href="public/style/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main-container">
+      <header>
+        <h1>Ai là vua động vật??</h1>
+        <p>
+          Cả lớp hãy cùng lắng nghe, rồi chọn đó là tiếng do con vật nào phát ra
+          nhé!
+        </p>
+      </header>
+
+      <div class="question-section">
+        <button id="play-question-btn" class="pulse-btn">
+          🔊 Nghe Tiếng Kêu
+        </button>
+      </div>
+
+      <main id="animal-grid"></main>
+    </div>
+
+    <div id="success-modal">
+      <div class="modal-content">
+        <h2 id="modal-title">Hoan hô! Bé đoán đúng rồi! 🎉</h2>
+        <img
+          id="modal-img"
+          src=""
+          alt="Hình ảnh con vật"
+          class="animal-img-large"
+        />
+        <h3 id="modal-animal-name">Tên con vật</h3>
+        <p id="modal-fact">Giải thích về con vật...</p>
+        <button id="next-btn">Chơi tiếp thôi!</button>
+      </div>
+    </div>
+
+    <script src="public/js/script.js"></script>
+  </body>
+</html>
