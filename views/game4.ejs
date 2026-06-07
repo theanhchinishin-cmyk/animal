@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📦 Game 4: Xếp Con Vật Theo Lợi Ích</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/home.css" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/game4.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body class="game4-page">
+    <%- include('partials/header') %>
+
+    <div class="main-container">
+      <header>
+        <div class="score-board">⭐ <span id="score-count">0</span></div>
+        <h1>📦 Xếp Con Vật Theo Lợi Ích</h1>
+        <p class="sub-title">Con hãy chọn lợi ích đúng của mỗi con vật nhé!</p>
+      </header>
+
+      <div class="progress-section">
+        <span class="progress-text">Câu <span id="current-q">1</span>/<span id="total-q">10</span></span>
+        <div class="progress-dots" id="progress-dots"></div>
+      </div>
+
+      <div class="animal-display">
+        <span class="animal-emoji" id="animal-emoji">🐟</span>
+        <div class="animal-name" id="animal-name">Con Cá</div>
+      </div>
+
+      <div class="question-text">Con vật này có lợi ích gì?</div>
+
+      <div class="options-grid" id="options-grid"></div>
+
+      <div class="feedback hidden" id="feedback"></div>
+
+      <button class="next-btn hidden" id="next-btn">Câu tiếp theo ➡️</button>
+    </div>
+
+    <div class="victory-modal" id="victory-modal">
+      <div class="modal-content">
+        <h2>🎉 Con thật giỏi! 🎉</h2>
+        <p>Con đã biết lợi ích của tất cả các con vật!</p>
+        <button class="restart-btn" id="restart-btn">Chơi lại từ đầu</button>
+      </div>
+    </div>
+
+    <script src="/js/game4.js"></script>
+  </body>
+</html>

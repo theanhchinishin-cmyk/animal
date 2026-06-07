@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔍 Game 1: Chỉ Đúng Bộ Phận</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/home.css" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/game1.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      /* Custom styles for image-based game */
+      .animal-display {
+        padding: 0 !important;
+        overflow: hidden;
+        position: relative;
+        background: #eef2f6;
+        border: 4px solid #cbd5e1;
+        border-radius: 30px;
+        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 0 #cbd5e1;
+      }
+
+      .image-wrapper {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        max-height: 450px;
+      }
+
+      #game-image {
+        display: block;
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 10px;
+        transition: opacity 0.3s ease;
+      }
+
+      .click-areas-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .clickable-area {
+        position: absolute;
+        pointer-events: auto;
+        /* border: 2px dashed rgba(255, 0, 0, 0.5); */ /* Bật để debug vùng chọn */
+        z-index: 10;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+
+      .question-text {
+        background: #fff8e1;
+        padding: 15px;
+        border-radius: 20px;
+        border: 2px solid #ffe0b5;
+        color: #b45f2b;
+        font-size: 1.6rem !important;
+        font-weight: 800;
+        margin-bottom: 25px;
+        text-align: center;
+        animation: pulse-text 2s infinite ease-in-out;
+      }
+
+      .feedback {
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 1.5rem !important;
+        font-weight: 700;
+        border-radius: 20px;
+      }
+
+      .animal-label-overlay {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(180, 95, 43, 0.9);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 1.1rem;
+        z-index: 20;
+        pointer-events: none;
+      }
+
+      @keyframes pulse-text {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .shake-error {
+        animation: shake 0.4s ease-in-out;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="game1-page">
+    <%- include('partials/header') %>
+
+    <div class="main-container">
+      <header>
+        <div class="score-board">⭐ <span id="score-count">0</span></div>
+        <h1>🔍 Chỉ Đúng Bộ Phận</h1>
+        <p class="sub-title">
+          Bé hãy quan sát hình và bấm vào bộ phận được hỏi nhé!
+        </p>
+      </header>
+
+      <div class="progress-section">
+        <span class="progress-text"
+          >Câu <span id="current-q">1</span>/<span id="total-q">4</span></span
+        >
+        <div class="progress-dots" id="progress-dots"></div>
+      </div>
+
+      <div class="question-text" id="question-text">Đang tải câu hỏi...</div>
+
+      <div class="animal-display" id="animal-display-container">
+        <div class="image-wrapper" id="image-wrapper">
+          <img id="game-image" src="" alt="Animal" />
+          <div class="click-areas-container" id="click-areas-container"></div>
+          <div class="animal-label-overlay" id="animal-name">Con vật</div>
+        </div>
+      </div>
+
+      <div class="feedback hidden" id="feedback"></div>
+
+      <button class="next-btn hidden" id="next-btn">Tiếp tục ➡️</button>
+    </div>
+
+    <div class="victory-modal" id="victory-modal">
+      <div class="modal-content">
+        <h2>🎉 Hoàn thành xuất sắc! 🎉</h2>
+        <p>Bé thật là giỏi!</p>
+        <button class="restart-btn" id="restart-btn">Chơi lại</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const quizData = [
+          {
+            name: "Con Công",
+            question: "Đâu là đuôi của con công?",
+            image:
+              "https://i.pinimg.com/1200x/65/31/6f/65316f0d069918343411de4ce7cd3097.jpg",
+            parts: [
+              {
+                top: "2%",
+                left: "0%",
+                width: "99%",
+                height: "62%"
+              }, // Phần đuôi phía trên
+              { top: "63%", left: "0%", width: "45%", height: "20%" }, // Phần đuôi bên trái
+              { top: "63%", left: "62%", width: "38%", height: "22%" } // Phần đuôi bên phải
+            ]
+          },
+          {
+            name: "Con Hươu",
+            question: "Đâu là chân của con hươu?",
+            image:
+              "https://i.pinimg.com/736x/df/74/dd/df74dda8f8486323c7a19c5d52fb2074.jpg",
+            parts: [
+              { top: "60%", left: "35%", width: "20%", height: "25%" }, // Chân trước
+              { top: "60%", left: "72%", width: "25%", height: "25%" } // Chân sau
+            ]
+          },
+          {
+            name: "Con Cá",
+            question: "Đâu là vây của con cá?",
+            image:
+              "https://i.pinimg.com/1200x/fb/1f/62/fb1f625e4ef916ddd78f1ba958be1ecc.jpg",
+            parts: [
+              { top: "18%", left: "44%", width: "30%", height: "15%" }, // Vây lưng
+              { top: "50%", left: "40%", width: "45%", height: "35%" } // Vây bụng
+            ]
+          },
+          {
+            name: "Con Cua",
+            question: "Đâu là càng của con cua?",
+            image:
+              "https://i.pinimg.com/736x/9e/42/3a/9e423ad0c374185a9b0a14c80f626073.jpg",
+            parts: [
+              { top: "10%", left: "23%", width: "22%", height: "30%" }, // Càng trái
+              { top: "10%", left: "53%", width: "22%", height: "30%" } // Càng phải
+            ]
+          }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+        let answered = false;
+
+        const scoreSpan = document.getElementById("score-count");
+        const currentQSpan = document.getElementById("current-q");
+        const totalQSpan = document.getElementById("total-q");
+        const dotsContainer = document.getElementById("progress-dots");
+        const animalImage = document.getElementById("game-image");
+        const animalName = document.getElementById("animal-name");
+        const questionText = document.getElementById("question-text");
+        const clickAreasContainer = document.getElementById(
+          "click-areas-container"
+        );
+        const animalDisplayContainer = document.getElementById(
+          "animal-display-container"
+        );
+        const feedback = document.getElementById("feedback");
+        const nextBtn = document.getElementById("next-btn");
+        const victoryModal = document.getElementById("victory-modal");
+        const restartBtn = document.getElementById("restart-btn");
+
+        const sfxCorrect = new Audio("/sounds/ting.mp3");
+        const sfxWrong = new Audio("/sounds/wrong.mp3");
+
+        function initDots() {
+          dotsContainer.innerHTML = "";
+          quizData.forEach((_, i) => {
+            const dot = document.createElement("span");
+            dot.className = "dot" + (i === 0 ? " active" : "");
+            dotsContainer.appendChild(dot);
+          });
+        }
+
+        function updateDots() {
+          const dots = dotsContainer.querySelectorAll(".dot");
+          dots.forEach((dot, i) => {
+            dot.classList.remove("active", "completed");
+            if (i < currentIdx) dot.classList.add("completed");
+            if (i === currentIdx) dot.classList.add("active");
+          });
+        }
+
+        function loadQuestion() {
+          answered = false;
+          feedback.classList.add("hidden");
+          nextBtn.classList.add("hidden");
+          clickAreasContainer.innerHTML = "";
+          animalImage.style.opacity = "0";
+
+          const q = quizData[currentIdx];
+          currentQSpan.textContent = currentIdx + 1;
+          totalQSpan.textContent = quizData.length;
+
+          animalImage.src = q.image;
+          animalImage.onload = () => {
+            animalImage.style.opacity = "1";
+          };
+
+          animalName.textContent = q.name;
+          questionText.textContent = q.question;
+          updateDots();
+
+          // Thêm các vùng click đúng
+          q.parts.forEach((part) => {
+            const area = document.createElement("div");
+            area.className = "clickable-area";
+            area.style.top = part.top;
+            area.style.left = part.left;
+            area.style.width = part.width;
+            area.style.height = part.height;
+
+            if (part.borderRadius) area.style.borderRadius = part.borderRadius;
+            if (part.clipPath) area.style.webkitClipPath = part.clipPath;
+            if (part.clipPath) area.style.clipPath = part.clipPath;
+
+            area.addEventListener("click", (e) => {
+              e.stopPropagation();
+              handleAnswer(true);
+            });
+            clickAreasContainer.appendChild(area);
+          });
+        }
+
+        function handleAnswer(isCorrect) {
+          if (answered) return;
+          answered = true;
+
+          if (isCorrect) {
+            feedback.textContent = "Chính xác! Bé thật là giỏi.";
+            feedback.className = "feedback correct-fb";
+            sfxCorrect.currentTime = 0;
+            sfxCorrect.play();
+            score++;
+            scoreSpan.textContent = score;
+
+            // Hiển thị viền xanh cho vùng đúng
+            const areas =
+              clickAreasContainer.querySelectorAll(".clickable-area");
+            areas.forEach((a) => {
+              a.style.border = "4px solid #4cd137";
+              a.style.background = "rgba(76, 209, 55, 0.2)";
+            });
+          } else {
+            feedback.textContent = "Bé hãy quan sát kỹ lại nhé!";
+            feedback.className = "feedback wrong-fb";
+            sfxWrong.currentTime = 0;
+            sfxWrong.play();
+
+            // Hiệu ứng rung khi sai
+            animalDisplayContainer.classList.add("shake-error");
+            setTimeout(
+              () => animalDisplayContainer.classList.remove("shake-error"),
+              400
+            );
+
+            // Gợi ý vùng đúng bằng viền mờ
+            const areas =
+              clickAreasContainer.querySelectorAll(".clickable-area");
+            areas.forEach((a) => {
+              a.style.border = "2px dashed #e16363";
+              a.style.background = "rgba(225, 99, 99, 0.1)";
+            });
+          }
+
+          feedback.classList.remove("hidden");
+          nextBtn.classList.remove("hidden");
+        }
+
+        // Click vào bất kỳ đâu trong container (trừ vùng đúng) là sai
+        animalDisplayContainer.addEventListener("click", (e) => {
+          if (!answered) {
+            // Kiểm tra xem click có phải vào vùng đúng không (thực ra e.stopPropagation đã xử lý)
+            handleAnswer(false);
+          }
+        });
+
+        function handleNext() {
+          currentIdx++;
+          if (currentIdx < quizData.length) {
+            loadQuestion();
+          } else {
+            victoryModal.classList.add("active");
+          }
+        }
+
+        function restartGame() {
+          currentIdx = 0;
+          score = 0;
+          scoreSpan.textContent = "0";
+          victoryModal.classList.remove("active");
+          initDots();
+          loadQuestion();
+        }
+
+        nextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          handleNext();
+        });
+        restartBtn.addEventListener("click", restartGame);
+
+        totalQSpan.textContent = quizData.length;
+        initDots();
+        loadQuestion();
+      });
+    </script>
+  </body>
+</html>

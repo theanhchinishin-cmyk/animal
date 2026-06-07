@@ -1,11 +1,11 @@
 :root {
-  --bg-color: #f0f4f8;
+  --bg-color: #fbf4e8;
   --card-bg: #ffffff;
   --text-color: #333a42;
-  --primary-color: #ff6b6b;
-  --secondary-color: #4ecdc4;
-  --yellow-pop: #ffe66d;
-  --main-gradient: linear-gradient(135deg, #ff9f43 0%, #ff5252 100%);
+  --primary-color: #f5b775;
+  --secondary-color: #c9924b;
+  --yellow-pop: #ffe0b5;
+  --main-gradient: linear-gradient(135deg, #f5b775 0%, #c9924b 100%);
   --font-family: "Nunito", sans-serif;
   --transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -34,14 +34,8 @@ body.game-page-wrapper .main-container {
 body {
   font-family: var(--font-family);
   background-color: var(--bg-color);
-
-  background-image:
-    radial-gradient(#ffe66d 1.5px, transparent 1.5px),
-    radial-gradient(#4ecdc4 1.5px, #f0f4f8 1.5px);
-  background-size: 40px 40px;
-  background-position:
-    0 0,
-    20px 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96' width='96' height='96'%3E%3Crect width='96' height='96' fill='%23fbf4e8' /%3E%3Cg fill='%23f5b775' opacity='0.3'%3E%3Ccircle cx='20' cy='20' r='2' /%3E%3Ccircle cx='76' cy='20' r='2' /%3E%3Ccircle cx='20' cy='76' r='2' /%3E%3Ccircle cx='76' cy='76' r='2' /%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 96px;
   color: var(--text-color);
   display: flex;
   justify-content: center;
@@ -65,9 +59,9 @@ header h1 {
   font-size: 3.2rem;
   font-weight: 900;
   margin-bottom: 12px;
-  color: #ff5252;
+  color: #b45f2b;
   text-shadow:
-    3px 3px 0px #ffe66d,
+    3px 3px 0px #ffe0b5,
     5px 5px 0px rgba(0, 0, 0, 0.05);
 }
 
@@ -89,13 +83,10 @@ header p {
   font-weight: 900;
   font-family: var(--font-family);
   color: #ffffff;
-  background: linear-gradient(135deg, #118ab2, #06d6a0);
+  background: #b15e31;
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow:
-    0 8px 0 #0f7599,
-    0 15px 25px rgba(17, 138, 178, 0.3);
   animation: pulse 2s infinite;
   transition: var(--transition);
   transform: translateY(0);
@@ -111,18 +102,18 @@ header p {
 @keyframes pulse {
   0% {
     box-shadow:
-      0 8px 0 #0f7599,
-      0 0 0 0 rgba(6, 214, 160, 0.7);
+      0 8px 0 #c5551d,
+      0 0 0 0 rgba(255, 145, 90, 0.212);
   }
   70% {
     box-shadow:
-      0 8px 0 #0f7599,
-      0 0 0 25px rgba(6, 214, 160, 0);
+      0 8px 0 #c5551d,
+      0 0 0 25px rgba(255, 145, 90, 0.212);
   }
   100% {
     box-shadow:
-      0 8px 0 #0f7599,
-      0 0 0 0 rgba(6, 214, 160, 0);
+      0 8px 0 #c5551d,
+      0 0 0 0 rgba(255, 145, 90, 0.212);
   }
 }
 

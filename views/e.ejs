@@ -3,17 +3,135 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bé Tìm Nhà Cho Thú - Game Kéo Thả</title>
-    <link rel="stylesheet" href="/style/home.css" />
-    <link rel="stylesheet" href="/style/e.css" />
+    <title>🐾 Game 2: Xem Hình Gọi Tên Con Vật</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Comfortaa:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/style/home.css" />
+    <link rel="stylesheet" href="/style/e.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <style>
+      .game-container {
+        max-width: 700px;
+      }
+      .question-area {
+        background: #ffffff;
+        border-radius: 35px;
+        padding: 30px;
+        text-align: center;
+        border: 5px solid #cbd5e1;
+        box-shadow: 0 12px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+      }
+      .question-area img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 25px;
+        border: 6px solid #ffe66d;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+      }
+      .question-area .emoji-big {
+        font-size: 6rem;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .question-area .hint-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #57606f;
+        margin-bottom: 5px;
+      }
+      .progress-bar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .progress-bar .dot {
+        width: 18px; height: 18px; border-radius: 50%;
+        background: #e2e8f0; border: 3px solid #cbd5e1;
+        transition: all 0.2s;
+      }
+      .progress-bar .dot.active {
+        background: #ffe0b5; border-color: #c9924b; transform: scale(1.2);
+      }
+      .progress-bar .dot.completed {
+        background: #4cd137; border-color: #3bad29;
+      }
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin: 20px 0;
+      }
+      .option-item {
+        background: #ffe8d4;
+        border-radius: 60px;
+        padding: 16px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.4rem;
+        cursor: pointer;
+        border: 3px solid #ffcf97;
+        transition: 0.08s linear;
+        color: #714623;
+      }
+      .option-item:active { transform: scale(0.96); }
+      .option-item.btn-correct {
+        background: #c8e6b5 !important;
+        border-color: #6f9e3f !important;
+        color: #2e3d1a;
+      }
+      .option-item.btn-wrong {
+        background: #fbc4c4 !important;
+        border-color: #e16363 !important;
+        color: #8b1a1a;
+      }
+      .option-item.disabled { pointer-events: none; opacity: 0.7; }
+      .feedback {
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin: 15px 0;
+        padding: 15px;
+        border-radius: 20px;
+      }
+      .correct-fb { color: #2e7d32; background: #e8f5e9; }
+      .wrong-fb { color: #c62828; background: #ffebee; }
+      .next-btn {
+        display: block;
+        margin: 0 auto;
+        padding: 16px 45px;
+        font-size: 1.4rem;
+        font-weight: 900;
+        font-family: "Nunito", sans-serif;
+        color: #ffffff;
+        background: linear-gradient(135deg, #f5b775 0%, #c9924b 100%);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 0 #cc4141, 0 10px 20px rgba(255,82,82,0.25);
+        transition: all 0.2s;
+      }
+      .next-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 #cc4141, 0 5px 10px rgba(255,82,82,0.35);
+      }
+      .hidden { display: none !important; }
+      @media (max-width: 576px) {
+        .question-area { padding: 20px 15px; }
+        .question-area img { width: 150px; height: 150px; }
+        .question-area .emoji-big { font-size: 4rem; }
+        .options-grid { grid-template-columns: 1fr; gap: 12px; }
+        .option-item { padding: 14px; font-size: 1.2rem; }
+      }
+    </style>
   </head>
 
   <body class="drag-game-page">
@@ -21,42 +139,31 @@
 
     <div class="game-container">
       <header class="game-internal-header">
-        <h1>🌍 BÉ TÌM NHÀ CHO THÚ 🌍</h1>
-        <p>Bé hãy kéo các con vật thả vào đúng ngôi nhà của chúng nhé!</p>
+        <h1>🐾 Xem Hình Gọi Tên Con Vật</h1>
+        <p>Bé hãy nhìn hình và chọn đúng tên con vật nhé!</p>
       </header>
 
-      <div id="animals-pool" class="animals-pool"></div>
+      <div class="progress-bar" id="progress-bar"></div>
 
-      <div class="environments-container">
-        <div class="zone" data-env="land" id="zone-land">
-          <div class="zone-header land-title">🌳 TRÊN CẠN</div>
-          <div class="zone-content" id="content-land"></div>
-        </div>
-
-        <div class="zone" data-env="water" id="zone-water">
-          <div class="zone-header water-title">🌊 DƯỚI NƯỚC</div>
-          <div class="zone-content" id="content-water"></div>
-        </div>
-
-        <div class="zone" data-env="soil" id="zone-soil">
-          <div class="zone-header soil-title">🌱 TRONG ĐẤT</div>
-          <div class="zone-content" id="content-soil"></div>
-        </div>
+      <div class="question-area">
+        <div id="image-container"></div>
+        <div class="hint-text" id="hint-text">Đây là con gì?</div>
+        <div class="options-grid" id="options-grid"></div>
       </div>
+
+      <div class="feedback hidden" id="feedback"></div>
+
+      <button class="next-btn hidden" id="next-btn">Câu tiếp theo ➡️</button>
     </div>
 
     <div id="victory-modal" class="modal">
       <div class="modal-content">
         <h2>👑 BÉ QUÁ XUẤT SẮC! 👑</h2>
-        <p>
-          Bé đã giúp tất cả các bạn nhỏ tìm được ngôi nhà hạnh phúc của mình
-          rồi!
-        </p>
+        <p>Bé đã gọi đúng tên tất cả các con vật rồi!</p>
         <button id="replay-btn">Chơi lại từ đầu nha</button>
       </div>
     </div>
 
     <script src="/js/e.js"></script>
-    <script src="/js/home.js"></script>
   </body>
 </html>

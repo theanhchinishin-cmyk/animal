@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏡 Game 6: Em Chọn Cách Ứng Xử Nào?</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/home.css" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/game6.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body class="game6-page">
+    <%- include('partials/header') %>
+
+    <div class="main-container">
+      <header>
+        <div class="score-board">⭐ <span id="score-count">0</span></div>
+        <h1>🏡 Em Chọn Cách Ứng Xử Nào?</h1>
+        <p class="sub-title">Cùng học cách yêu quý và bảo vệ bản thân nhé!</p>
+      </header>
+
+      <!-- PHẦN 1: BỘ SƯU TẬP -->
+      <div class="collection-area">
+        <h3>📸 Bộ sưu tập thú cưng của lớp mình</h3>
+
+        <div class="emoji-picker" style="flex-wrap: wrap;">
+          <span class="emoji-opt active" data-emoji="🐱">🐱</span>
+          <span class="emoji-opt" data-emoji="🐶">🐶</span>
+          <span class="emoji-opt" data-emoji="🐰">🐰</span>
+          <span class="emoji-opt" data-emoji="🐹">🐹</span>
+          <span class="emoji-opt" data-emoji="🐢">🐢</span>
+          <span class="emoji-opt" data-emoji="🐟">🐟</span>
+          <span class="emoji-opt" data-emoji="🐯">🐯</span>
+          <span class="emoji-opt" data-emoji="🐘">🐘</span>
+          <span class="emoji-opt" data-emoji="🐵">🐵</span>
+          <span class="emoji-opt" data-emoji="🐿️">🐿️</span>
+          <span class="emoji-opt" data-emoji="🦔">🦔</span>
+          <span class="emoji-opt" data-emoji="🐻">🐻</span>
+        </div>
+
+        <div class="collection-form">
+          <input type="text" id="student-name" placeholder="Tên của con..." autocomplete="off" />
+          <input type="text" id="pet-name" placeholder="Tên thú cưng..." autocomplete="off" />
+          <input type="text" id="pet-habit" placeholder="Thói quen của thú cưng..." autocomplete="off" />
+          <button class="add-btn" id="add-to-board-btn">➕ Thêm vào bộ sưu tập</button>
+        </div>
+
+        <div class="whiteboard" id="whiteboard-content">
+          <div class="empty-text">💬 Hãy thêm thú cưng của con vào đây nhé!</div>
+        </div>
+      </div>
+
+      <!-- PHẦN 2: TÌNH HUỐNG -->
+      <div class="scenario-section">
+        <div class="part-badge">PHẦN 2: CÁCH ỨNG XỬ VỚI ĐỘNG VẬT</div>
+
+        <div class="scenario-progress">
+          <span class="scenario-progress-text">Tình huống <span id="scenario-current">1</span>/<span id="scenario-total">4</span></span>
+          <div class="progress-dots" id="scenario-dots"></div>
+        </div>
+
+        <div class="scenario-text" id="scenario-text">Đang tải tình huống...</div>
+
+        <div class="scenario-options" id="scenario-options"></div>
+
+        <div class="scenario-feedback hidden" id="scenario-feedback"></div>
+
+        <button class="scenario-next-btn hidden" id="scenario-next-btn">Tình huống tiếp theo ➡️</button>
+      </div>
+    </div>
+
+    <div class="victory-modal" id="victory-modal">
+      <div class="modal-content">
+        <h2>👏 Con thật tuyệt vời! 👏</h2>
+        <p>Con đã biết cách yêu quý vật nuôi và bảo vệ sức khỏe của mình rồi!</p>
+        <button class="restart-btn" id="restart-btn">Chơi lại từ đầu</button>
+      </div>
+    </div>
+
+    <script src="/js/game6.js"></script>
+  </body>
+</html>

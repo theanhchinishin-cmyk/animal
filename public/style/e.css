@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f7f1e3;
+  --bg-color: #fbf4e8;
   --font-family: "Nunito", sans-serif;
   --transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -29,13 +29,8 @@ body.drag-game-page .game-container {
 body {
   font-family: var(--font-family);
   background-color: var(--bg-color);
-  background-image:
-    radial-gradient(#ffbe0b 1.5px, transparent 1.5px),
-    radial-gradient(#ff007f 1.5px, #f7f1e3 1.5px);
-  background-size: 30px 30px;
-  background-position:
-    0 0,
-    15px 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96' width='96' height='96'%3E%3Crect width='96' height='96' fill='%23fbf4e8' /%3E%3Cg fill='%23f5b775' opacity='0.3'%3E%3Ccircle cx='20' cy='20' r='2' /%3E%3Ccircle cx='76' cy='20' r='2' /%3E%3Ccircle cx='20' cy='76' r='2' /%3E%3Ccircle cx='76' cy='76' r='2' /%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 96px;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -56,9 +51,7 @@ header {
 header h1 {
   font-size: 3rem;
   font-weight: 900;
-  color: #ff007f;
-  text-shadow: 3px 3px 0px #ffbe0b;
-  margin-bottom: 8px;
+  color: #b15e31;
 }
 
 header p {

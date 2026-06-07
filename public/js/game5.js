@@ -1,0 +1,180 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const quizData = [
+    {
+      emoji: "🐭",
+      name: "Con Chuột",
+      harm: "Cắn phá đồ đạc, làm bẩn thức ăn",
+      options: [
+        "Cắn phá đồ đạc, làm bẩn thức ăn",
+        "Cho sữa ngon",
+        "Giúp giữ nhà",
+        "Làm cảnh trong nhà"
+      ]
+    },
+    {
+      emoji: "🪳",
+      name: "Con Gián",
+      harm: "Gây mất vệ sinh",
+      options: [
+        "Gây mất vệ sinh",
+        "Bắt muỗi",
+        "Cho thịt ngon",
+        "Làm đẹp nhà cửa"
+      ]
+    },
+    {
+      emoji: "🪰",
+      name: "Con Ruồi",
+      harm: "Đậu vào thức ăn, truyền bệnh",
+      options: [
+        "Đậu vào thức ăn, truyền bệnh",
+        "Hút mật hoa",
+        "Làm thuốc",
+        "Giúp cây thụ phấn"
+      ]
+    },
+    {
+      emoji: "🦟",
+      name: "Con Muỗi",
+      harm: "Đốt người, truyền bệnh",
+      options: [
+        "Đốt người, truyền bệnh",
+        "Cho mật ngọt",
+        "Làm sạch không khí",
+        "Giúp cây cối phát triển"
+      ]
+    }
+  ];
+
+  let currentIdx = 0;
+  let score = 0;
+  let answered = false;
+
+  const scoreSpan = document.getElementById("score-count");
+  const currentQSpan = document.getElementById("current-q");
+  const totalQSpan = document.getElementById("total-q");
+  const dotsContainer = document.getElementById("progress-dots");
+  const animalEmoji = document.getElementById("animal-emoji");
+  const animalName = document.getElementById("animal-name");
+  const optionsGrid = document.getElementById("options-grid");
+  const feedback = document.getElementById("feedback");
+  const nextBtn = document.getElementById("next-btn");
+  const victoryModal = document.getElementById("victory-modal");
+  const restartBtn = document.getElementById("restart-btn");
+
+  const sfxCorrect = new Audio("/sounds/ting.mp3");
+  const sfxWrong = new Audio("/sounds/wrong.mp3");
+
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function initDots() {
+    dotsContainer.innerHTML = "";
+    quizData.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.className = "dot" + (i === 0 ? " active" : "");
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll(".dot");
+    dots.forEach((dot, i) => {
+      dot.classList.remove("active", "completed");
+      if (i < currentIdx) dot.classList.add("completed");
+      if (i === currentIdx) dot.classList.add("active");
+    });
+  }
+
+  function loadQuestion() {
+    answered = false;
+    feedback.classList.add("hidden");
+    nextBtn.classList.add("hidden");
+    optionsGrid.innerHTML = "";
+
+    const q = quizData[currentIdx];
+    currentQSpan.textContent = currentIdx + 1;
+    totalQSpan.textContent = quizData.length;
+    animalEmoji.textContent = q.emoji;
+    animalName.textContent = q.name;
+    updateDots();
+
+    const shuffled = shuffle([...q.options]);
+    shuffled.forEach((opt) => {
+      const div = document.createElement("div");
+      div.className = "option-item";
+      div.textContent = opt;
+      div.addEventListener("click", () => handleAnswer(opt, div));
+      optionsGrid.appendChild(div);
+    });
+  }
+
+  function handleAnswer(selected, el) {
+    if (answered) return;
+    const q = quizData[currentIdx];
+    const allOpts = optionsGrid.querySelectorAll(".option-item");
+    answered = true;
+
+    allOpts.forEach((o) => o.classList.add("disabled"));
+
+    if (selected === q.harm) {
+      el.classList.add("btn-correct");
+      feedback.textContent = "Đúng rồi! Con đã biết tác hại của con vật này.";
+      feedback.className = "feedback correct-fb";
+      sfxCorrect.currentTime = 0;
+      sfxCorrect.play();
+      score++;
+      scoreSpan.textContent = score;
+    } else {
+      el.classList.add("btn-wrong");
+      allOpts.forEach((o) => {
+        if (o.textContent === q.harm) o.classList.add("btn-correct");
+      });
+      feedback.textContent = "Con hãy nhớ lại nội dung trong tranh SGK nhé.";
+      feedback.className = "feedback wrong-fb";
+      sfxWrong.currentTime = 0;
+      sfxWrong.play();
+    }
+
+    feedback.classList.remove("hidden");
+    if (currentIdx < quizData.length - 1) {
+      nextBtn.classList.remove("hidden");
+      nextBtn.textContent = "Câu tiếp theo ➡️";
+    } else {
+      nextBtn.classList.remove("hidden");
+      nextBtn.textContent = "Xem kết quả 🎉";
+    }
+  }
+
+  function handleNext() {
+    currentIdx++;
+    if (currentIdx < quizData.length) {
+      loadQuestion();
+    } else {
+      victoryModal.classList.add("active");
+    }
+  }
+
+  function restartGame() {
+    currentIdx = 0;
+    score = 0;
+    scoreSpan.textContent = "0";
+    victoryModal.classList.remove("active");
+    initDots();
+    loadQuestion();
+  }
+
+  shuffle(quizData);
+
+  nextBtn.addEventListener("click", handleNext);
+  restartBtn.addEventListener("click", restartGame);
+
+  totalQSpan.textContent = quizData.length;
+  initDots();
+  loadQuestion();
+});

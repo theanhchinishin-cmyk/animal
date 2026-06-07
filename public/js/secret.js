@@ -1,54 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
   const quizData = [
     {
-      clue: "Con vật này có 4 chân, có lông, sống trong nhà, hay vẫy đuôi khi vui. Là con gì nhỉ?",
-      keywords: ["chó", "cho"],
-      nameDisplay: "Con Chó 🐶",
-      img: "dog.jpg"
+      name: "Con Kiến",
+      emoji: "🐜",
+      img: null,
+      traits: [
+        { label: "Kích thước", correct: "nhỏ", options: ["to", "nhỏ", "vừa"] },
+        { label: "Chiều cao", correct: "thấp", options: ["cao", "thấp"] },
+        { label: "Màu sắc", correct: "màu đen", options: ["màu đen", "màu nâu/vàng", "màu trắng"] },
+        { label: "Chân", correct: "nhiều chân", options: ["hai chân", "bốn chân", "nhiều chân"] }
+      ]
     },
     {
-      clue: "Con vật này không có chân, sống dưới nước, bơi rất giỏi. Là con gì nhỉ?",
-      keywords: ["cá", "ca"],
-      nameDisplay: "Con Cá 🐟",
-      img: "fish.jpg"
+      name: "Con Bò",
+      img: "cow.jpg",
+      emoji: null,
+      traits: [
+        { label: "Kích thước", correct: "to", options: ["to", "nhỏ", "vừa"] },
+        { label: "Chiều cao", correct: "cao", options: ["cao", "thấp"] },
+        { label: "Màu sắc", correct: "màu nâu/vàng", options: ["màu đen", "màu nâu/vàng", "màu trắng"] },
+        { label: "Chân", correct: "bốn chân", options: ["hai chân", "bốn chân", "nhiều chân"] }
+      ]
     },
     {
-      clue: "Con vật này có 2 cánh, biết bay, hót rất hay. Là con gì nhỉ?",
-      keywords: ["chim"],
-      nameDisplay: "Con Chim 🐦",
-      img: "bird.jpg"
-    },
-    {
-      clue: "Con vật này nhỏ nhắn, thích bắt chuột, suốt ngày kêu meo meo. Là con gì nhỉ?",
-      keywords: ["mèo", "meo"],
-      nameDisplay: "Con Mèo 🐱",
-      img: "cat.jpg"
-    },
-    {
-      clue: "Con vật này có đôi tai rất dài, đuôi ngắn, thích ăn cà rốt và nhảy tung tăng. Là con gì nhỉ?",
-      keywords: ["thỏ", "tho"],
-      nameDisplay: "Con Thỏ 🐰",
-      img: "rabbit.jpg"
-    },
-    {
-      clue: "Con vật này thân hình to lớn nhất trên cạn, có cái vòi dài và đôi tai to như hai cái quạt. Là con gì nhỉ?",
-      keywords: ["voi"],
-      nameDisplay: "Con Voi 🐘",
-      img: "elephant.jpg"
+      name: "Con Vịt",
+      img: "duck.jpg",
+      emoji: null,
+      traits: [
+        { label: "Kích thước", correct: "nhỏ", options: ["to", "nhỏ", "vừa"] },
+        { label: "Chiều cao", correct: "thấp", options: ["cao", "thấp"] },
+        { label: "Màu sắc", correct: "màu trắng", options: ["màu đen", "màu nâu/vàng", "màu trắng"] },
+        { label: "Đặc điểm", correct: "có mỏ", options: ["có mỏ", "có vòi", "có sừng"] }
+      ]
     }
   ];
 
   let currentIdx = 0;
   let stickerCollected = 0;
+  let selections = {};
+  let checked = false;
 
-  const clueText = document.getElementById("clue-text");
-  const currentRound = document.getElementById("current-round");
-  const totalRoundsText = document.getElementById("total-rounds");
-  const answerInput = document.getElementById("answer-input");
-  const guessBtn = document.getElementById("guess-btn");
-  const resultCard = document.getElementById("result-card");
-  const animalImg = document.getElementById("animal-img");
-  const animalName = document.getElementById("animal-name");
+  const progressBar = document.getElementById("progress-bar");
+  const animalDisplay = document.getElementById("animal-display");
+  const animalTitle = document.getElementById("animal-title");
+  const traitsContainer = document.getElementById("traits-container");
+  const checkBtn = document.getElementById("check-btn");
+  const feedbackBox = document.getElementById("feedback-box");
   const nextBtn = document.getElementById("next-btn");
   const stickerCount = document.getElementById("sticker-count");
   const finishModal = document.getElementById("finish-modal");
@@ -57,74 +54,144 @@ document.addEventListener("DOMContentLoaded", () => {
   const sfxCorrect = new Audio("/sounds/ting.mp3");
   const sfxWrong = new Audio("/sounds/wrong.mp3");
 
-  function shuffleQuestions(array) {
-    for (let i = array.length - 1; i > 0; i--) {
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+    return arr;
+  }
+
+  function initProgress() {
+    progressBar.innerHTML = "";
+    quizData.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.className = "dot" + (i === 0 ? " active" : "");
+      progressBar.appendChild(dot);
+    });
+  }
+
+  function updateProgress() {
+    const dots = progressBar.querySelectorAll(".dot");
+    dots.forEach((dot, i) => {
+      dot.classList.remove("active", "completed");
+      if (i < currentIdx) dot.classList.add("completed");
+      if (i === currentIdx) dot.classList.add("active");
+    });
   }
 
   function loadQuestion() {
-    resultCard.classList.add("hidden");
-    answerInput.value = "";
-    answerInput.classList.remove("shake-error");
-    answerInput.disabled = false;
-    guessBtn.disabled = false;
+    selections = {};
+    checked = false;
+    feedbackBox.classList.add("hidden");
+    nextBtn.classList.add("hidden");
+    checkBtn.classList.remove("hidden");
+    traitsContainer.innerHTML = "";
+    animalDisplay.innerHTML = "";
 
-    const currentData = quizData[currentIdx];
-    clueText.textContent = currentData.clue;
+    const q = quizData[currentIdx];
+    updateProgress();
+    animalTitle.textContent = q.name;
 
-    currentRound.textContent = currentIdx + 1;
-    totalRoundsText.textContent = quizData.length;
+    if (q.img) {
+      const img = document.createElement("img");
+      img.src = "/images/" + q.img;
+      img.alt = q.name;
+      animalDisplay.appendChild(img);
+    } else if (q.emoji) {
+      const span = document.createElement("span");
+      span.className = "big-emoji";
+      span.textContent = q.emoji;
+      animalDisplay.appendChild(span);
+    }
 
-    answerInput.focus();
+    q.traits.forEach((trait, tIdx) => {
+      const row = document.createElement("div");
+      row.className = "trait-row";
+
+      const label = document.createElement("span");
+      label.className = "trait-label";
+      label.textContent = trait.label + ":";
+      row.appendChild(label);
+
+      const optionsDiv = document.createElement("div");
+      optionsDiv.className = "trait-options";
+      optionsDiv.dataset.traitIdx = tIdx;
+
+      const shuffledOpts = shuffle([...trait.options]);
+      shuffledOpts.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.className = "trait-btn";
+        btn.textContent = opt;
+        btn.dataset.value = opt;
+        btn.addEventListener("click", () => {
+          if (checked) return;
+          optionsDiv.querySelectorAll(".trait-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          selections[tIdx] = opt;
+        });
+        optionsDiv.appendChild(btn);
+      });
+
+      row.appendChild(optionsDiv);
+      traitsContainer.appendChild(row);
+    });
   }
 
   function checkAnswer() {
-    const userInput = answerInput.value.trim().toLowerCase();
+    const q = quizData[currentIdx];
+    const totalTraits = q.traits.length;
+    const selectedCount = Object.keys(selections).length;
 
-    if (userInput === "") {
-      highlightError();
+    if (selectedCount < totalTraits) {
+      feedbackBox.textContent = "Con hãy chọn đặc điểm cho tất cả các mục nhé!";
+      feedbackBox.className = "feedback-box wrong-fb";
+      feedbackBox.classList.remove("hidden");
       return;
     }
 
-    const currentData = quizData[currentIdx];
-    let isCorrect = false;
+    checked = true;
+    let correctCount = 0;
 
-    for (let kw of currentData.keywords) {
-      if (userInput.includes(kw)) {
-        isCorrect = true;
-        break;
+    const rows = traitsContainer.querySelectorAll(".trait-row");
+    rows.forEach((row, tIdx) => {
+      const btns = row.querySelectorAll(".trait-btn");
+      btns.forEach((btn) => {
+        btn.classList.add("disabled");
+        if (btn.dataset.value === q.traits[tIdx].correct) {
+          btn.classList.add("correct-show");
+        }
+        if (btn.classList.contains("selected") && btn.dataset.value !== q.traits[tIdx].correct) {
+          btn.classList.add("wrong-show");
+        }
+      });
+      if (selections[tIdx] === q.traits[tIdx].correct) {
+        correctCount++;
       }
-    }
+    });
 
-    if (isCorrect) {
+    if (correctCount === totalTraits) {
+      feedbackBox.textContent = "Rất tốt! Con đã quan sát và mô tả được đặc điểm của con vật.";
+      feedbackBox.className = "feedback-box correct-fb";
       sfxCorrect.currentTime = 0;
       sfxCorrect.play();
 
       stickerCollected++;
       stickerCount.textContent = stickerCollected;
-
-      answerInput.disabled = true;
-      guessBtn.disabled = true;
-
-      animalImg.src = `/images/${currentData.img}`;
-      animalName.textContent = currentData.nameDisplay;
-      resultCard.classList.remove("hidden");
-
-      resultCard.scrollIntoView({ behavior: "smooth" });
     } else {
+      feedbackBox.textContent = "Con hãy xem lại và quan sát kỹ hơn về màu sắc, kích thước hoặc đặc điểm của con vật nhé.";
+      feedbackBox.className = "feedback-box wrong-fb";
       sfxWrong.currentTime = 0;
       sfxWrong.play();
-      highlightError();
     }
-  }
 
-  function highlightError() {
-    answerInput.classList.add("shake-error");
-    setTimeout(() => {
-      answerInput.classList.remove("shake-error");
-    }, 400);
+    feedbackBox.classList.remove("hidden");
+    checkBtn.classList.add("hidden");
+
+    nextBtn.classList.remove("hidden");
+    nextBtn.textContent = currentIdx < quizData.length - 1
+      ? "Câu tiếp theo ➡️"
+      : "Xem kết quả 🎉";
   }
 
   function handleNext() {
@@ -141,21 +208,17 @@ document.addEventListener("DOMContentLoaded", () => {
     stickerCollected = 0;
     stickerCount.textContent = "0";
     finishModal.classList.remove("active");
-
-    shuffleQuestions(quizData);
+    shuffle(quizData);
+    initProgress();
     loadQuestion();
   }
 
-  guessBtn.addEventListener("click", checkAnswer);
+  shuffle(quizData);
+
+  checkBtn.addEventListener("click", checkAnswer);
   nextBtn.addEventListener("click", handleNext);
   restartBtn.addEventListener("click", restartGame);
 
-  answerInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter" && !guessBtn.disabled) {
-      checkAnswer();
-    }
-  });
-
-  shuffleQuestions(quizData);
+  initProgress();
   loadQuestion();
 });
