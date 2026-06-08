@@ -6,8 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
       traits: [
         { label: "Kích thước", correct: "nhỏ", options: ["to", "nhỏ", "vừa"] },
         { label: "Chiều cao", correct: "thấp", options: ["cao", "thấp"] },
-        { label: "Màu sắc", correct: "màu đen", options: ["màu đen", "màu nâu/vàng", "màu trắng"] },
-        { label: "Chân", correct: "nhiều chân", options: ["hai chân", "bốn chân", "nhiều chân"] }
+        {
+          label: "Màu sắc",
+          correct: "màu đen",
+          options: ["màu đen", "màu nâu/vàng", "màu trắng"]
+        },
+        {
+          label: "Chân",
+          correct: "nhiều chân",
+          options: ["hai chân", "bốn chân", "nhiều chân"]
+        }
       ]
     },
     {
@@ -17,8 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
       traits: [
         { label: "Kích thước", correct: "to", options: ["to", "nhỏ", "vừa"] },
         { label: "Chiều cao", correct: "cao", options: ["cao", "thấp"] },
-        { label: "Màu sắc", correct: "màu nâu/vàng", options: ["màu đen", "màu nâu/vàng", "màu trắng"] },
-        { label: "Chân", correct: "bốn chân", options: ["hai chân", "bốn chân", "nhiều chân"] }
+        {
+          label: "Màu sắc",
+          correct: "màu nâu/vàng",
+          options: ["màu đen", "màu nâu/vàng", "màu trắng"]
+        },
+        {
+          label: "Chân",
+          correct: "bốn chân",
+          options: ["hai chân", "bốn chân", "nhiều chân"]
+        }
       ]
     },
     {
@@ -26,10 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
       img: "duck.jpg",
       emoji: null,
       traits: [
-        { label: "Kích thước", correct: "nhỏ", options: ["to", "nhỏ", "vừa"] },
+        { label: "Kích thước", correct: "vừa", options: ["to", "nhỏ", "vừa"] },
         { label: "Chiều cao", correct: "thấp", options: ["cao", "thấp"] },
-        { label: "Màu sắc", correct: "màu trắng", options: ["màu đen", "màu nâu/vàng", "màu trắng"] },
-        { label: "Đặc điểm", correct: "có mỏ", options: ["có mỏ", "có vòi", "có sừng"] }
+        {
+          label: "Màu sắc",
+          correct: "màu trắng",
+          options: ["màu đen", "màu nâu/vàng", "màu trắng"]
+        },
+        {
+          label: "Đặc điểm",
+          correct: "có mỏ",
+          options: ["có mỏ", "có vòi", "có sừng"]
+        }
       ]
     }
   ];
@@ -125,7 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.dataset.value = opt;
         btn.addEventListener("click", () => {
           if (checked) return;
-          optionsDiv.querySelectorAll(".trait-btn").forEach(b => b.classList.remove("selected"));
+          optionsDiv
+            .querySelectorAll(".trait-btn")
+            .forEach((b) => b.classList.remove("selected"));
           btn.classList.add("selected");
           selections[tIdx] = opt;
         });
@@ -160,7 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (btn.dataset.value === q.traits[tIdx].correct) {
           btn.classList.add("correct-show");
         }
-        if (btn.classList.contains("selected") && btn.dataset.value !== q.traits[tIdx].correct) {
+        if (
+          btn.classList.contains("selected") &&
+          btn.dataset.value !== q.traits[tIdx].correct
+        ) {
           btn.classList.add("wrong-show");
         }
       });
@@ -170,7 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (correctCount === totalTraits) {
-      feedbackBox.textContent = "Rất tốt! Con đã quan sát và mô tả được đặc điểm của con vật.";
+      feedbackBox.textContent =
+        "Rất tốt! Con đã quan sát và mô tả được đặc điểm của con vật.";
       feedbackBox.className = "feedback-box correct-fb";
       sfxCorrect.currentTime = 0;
       sfxCorrect.play();
@@ -178,7 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
       stickerCollected++;
       stickerCount.textContent = stickerCollected;
     } else {
-      feedbackBox.textContent = "Con hãy xem lại và quan sát kỹ hơn về màu sắc, kích thước hoặc đặc điểm của con vật nhé.";
+      feedbackBox.textContent =
+        "Con hãy xem lại và quan sát kỹ hơn về màu sắc, kích thước hoặc đặc điểm của con vật nhé.";
       feedbackBox.className = "feedback-box wrong-fb";
       sfxWrong.currentTime = 0;
       sfxWrong.play();
@@ -188,9 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
     checkBtn.classList.add("hidden");
 
     nextBtn.classList.remove("hidden");
-    nextBtn.textContent = currentIdx < quizData.length - 1
-      ? "Câu tiếp theo ➡️"
-      : "Xem kết quả 🎉";
+    nextBtn.textContent =
+      currentIdx < quizData.length - 1 ? "Câu tiếp theo ➡️" : "Xem kết quả 🎉";
   }
 
   function handleNext() {
