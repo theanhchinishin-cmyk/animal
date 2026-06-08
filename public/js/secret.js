@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizData = [
     {
       name: "Con Kiến",
-      emoji: "🐜",
-      img: null,
+      img: "ant.jpg",
       traits: [
         { label: "Kích thước", correct: "nhỏ", options: ["to", "nhỏ", "vừa"] },
         { label: "Chiều cao", correct: "thấp", options: ["cao", "thấp"] },

@@ -3,20 +3,20 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       riddle: "Con gì tám cẳng hai càng?",
       keywords: ["cua"],
-      display: "Con Cua 🦀",
-      emoji: "🦀"
+      display: "Con Cua",
+      img: "crab.jpg"
     },
     {
       riddle: "Con gì cánh bay vo ve?",
       keywords: ["ong"],
-      display: "Con Ong 🐝",
-      emoji: "🐝"
+      display: "Con Ong",
+      img: "bee.jpg"
     },
     {
-      riddle: "Con gì vây và đuôi, sống dưới nước?",
+      riddle: "Con gì có vây và đuôi, sống dưới nước?",
       keywords: ["cá", "ca"],
-      display: "Con Cá 🐟",
-      emoji: "🐟"
+      display: "Con Cá",
+      img: "fish.jpg"
     }
   ];
 
@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
       answerInput.disabled = true;
       guessBtn.disabled = true;
 
-      resultEmoji.textContent = q.emoji;
+      resultEmoji.src = "/images/" + q.img;
+      resultEmoji.alt = q.name || q.display;
       resultName.textContent = q.display;
 
       feedback.classList.add("hidden");

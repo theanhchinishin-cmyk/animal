@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   emojiOpts.forEach((opt) => {
     opt.addEventListener("click", function () {
-      document.querySelectorAll(".emoji-opt").forEach(o => o.classList.remove("active"));
+      document
+        .querySelectorAll(".emoji-opt")
+        .forEach((o) => o.classList.remove("active"));
       this.classList.add("active");
       selectedEmoji = this.dataset.emoji;
     });
@@ -26,7 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let hasError = false;
     [studentNameInput, petNameInput, petHabitInput].forEach((inp, i) => {
-      if ((i === 0 && name === "") || (i === 1 && petName === "") || (i === 2 && habit === "")) {
+      if (
+        (i === 0 && name === "") ||
+        (i === 1 && petName === "") ||
+        (i === 2 && habit === "")
+      ) {
         inp.classList.add("shake-error");
         setTimeout(() => inp.classList.remove("shake-error"), 400);
         hasError = true;
@@ -60,52 +66,93 @@ document.addEventListener("DOMContentLoaded", () => {
   const scenarioData = [
     {
       situation: "🐱 Thấy bạn đang trêu chọc mèo, em sẽ làm gì?",
-      options: ["Khuyên bạn không nên trêu mèo", "Cùng bạn trêu mèo", "Mặc kệ bạn", "Cười cợt bạn"],
+      options: [
+        "Khuyên bạn không nên trêu mèo",
+        "Cùng bạn trêu mèo",
+        "Mặc kệ bạn",
+        "Cười cợt bạn"
+      ],
       correct: "Khuyên bạn không nên trêu mèo"
     },
     {
       situation: "🐟 Em có một bể cá nhỏ, em cần làm gì hằng ngày?",
-      options: ["Cho cá ăn vừa đủ và thay nước", "Cho cá ăn thật nhiều", "Không cần chăm sóc", "Bỏ mặc bể cá"],
+      options: [
+        "Cho cá ăn vừa đủ và thay nước",
+        "Cho cá ăn thật nhiều",
+        "Không cần chăm sóc",
+        "Bỏ mặc bể cá"
+      ],
       correct: "Cho cá ăn vừa đủ và thay nước"
     },
     {
       situation: "🐕 Em nuôi một chú chó nhỏ, em nên làm gì mỗi ngày?",
-      options: ["Cho chó ăn và dắt đi dạo", "Nhốt chó trong chuồng", "Không chơi với chó", "Để chó tự lo"],
+      options: [
+        "Cho chó ăn và dắt đi dạo",
+        "Nhốt chó trong chuồng",
+        "Không chơi với chó",
+        "Để chó tự lo"
+      ],
       correct: "Cho chó ăn và dắt đi dạo"
     },
     {
       situation: "🐦 Em thấy tổ chim non bị rơi xuống đất, em sẽ làm gì?",
-      options: ["Nhờ người lớn đặt lại lên cây", "Bắt chim non về nuôi", "Mặc kệ tổ chim", "Ném đá vào tổ chim"],
+      options: [
+        "Nhờ người lớn đặt lại lên cây",
+        "Bắt chim non về nuôi",
+        "Mặc kệ tổ chim",
+        "Ném đá vào tổ chim"
+      ],
       correct: "Nhờ người lớn đặt lại lên cây"
     },
     {
       situation: "🐰 Em muốn chơi cùng bạn thỏ, em nên làm gì?",
-      options: ["Nhẹ nhàng vuốt ve và cho thỏ ăn", "Kéo tai thỏ", "Đuổi thỏ chạy", "Ném đồ chơi vào thỏ"],
+      options: [
+        "Nhẹ nhàng vuốt ve và cho thỏ ăn",
+        "Kéo tai thỏ",
+        "Đuổi thỏ chạy",
+        "Ném đồ chơi vào thỏ"
+      ],
       correct: "Nhẹ nhàng vuốt ve và cho thỏ ăn"
     },
     {
-      situation: "🦟 Buổi tối có nhiều muỗi quá! Em sẽ làm gì để không bị muỗi đốt?",
-      options: ["Ngủ trong màn", "Mở cửa sổ thật to", "Ra ngoài sân chơi", "Bật đèn sáng"],
+      situation:
+        "🦟 Buổi tối có nhiều muỗi quá! Em sẽ làm gì để không bị muỗi đốt?",
+      options: [
+        "Ngủ trong màn",
+        "Mở cửa sổ thật to",
+        "Ra ngoài sân chơi",
+        "Bật đèn sáng"
+      ],
       correct: "Ngủ trong màn"
     },
     {
       situation: "🐍 Em thấy một con rắn trong vườn, em sẽ làm gì?",
-      options: ["Đứng yên và gọi người lớn", "Lại gần xem rắn", "Lấy gậy chọc rắn", "Bắt rắn chơi"],
+      options: [
+        "Đứng yên và gọi người lớn",
+        "Lại gần xem rắn",
+        "Lấy gậy chọc rắn",
+        "Bắt rắn chơi"
+      ],
       correct: "Đứng yên và gọi người lớn"
     },
     {
       situation: "🐝 Thấy tổ ong trên cây, em nên làm gì?",
-      options: ["Tránh xa và không chọc phá", "Ném đá vào tổ ong", "Leo lên cây lấy mật", "Rung cây cho ong bay"],
+      options: [
+        "Tránh xa và không chọc phá",
+        "Ném đá vào tổ ong",
+        "Leo lên cây lấy mật",
+        "Rung cây cho ong bay"
+      ],
       correct: "Tránh xa và không chọc phá"
     },
     {
-      situation: "🪰 Em thấy con ruồi đậu vào thức ăn, em sẽ làm gì?",
-      options: ["Đậy thức ăn lại cẩn thận", "Đuổi ruồi đi rồi ăn tiếp", "Mặc kệ không quan tâm", "Bỏ thức ăn đi ngay"],
-      correct: "Đậy thức ăn lại cẩn thận"
-    },
-    {
       situation: "🐀 Nhà em thấy có chuột hoặc gián, em nên làm gì?",
-      options: ["Giữ nhà cửa sạch sẽ và báo người lớn", "Bắt chuột chơi", "Bỏ mặc không quan tâm", "Để thức ăn bừa bãi"],
+      options: [
+        "Giữ nhà cửa sạch sẽ và báo người lớn",
+        "Bắt chuột chơi",
+        "Bỏ mặc không quan tâm",
+        "Để thức ăn bừa bãi"
+      ],
       correct: "Giữ nhà cửa sạch sẽ và báo người lớn"
     }
   ];
@@ -197,7 +244,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (selected === s.correct) {
       el.classList.add("btn-correct");
-      scenarioFeedback.textContent = correctMessages[Math.floor(Math.random() * correctMessages.length)];
+      scenarioFeedback.textContent =
+        correctMessages[Math.floor(Math.random() * correctMessages.length)];
       scenarioFeedback.className = "scenario-feedback feedback-correct";
       sfxCorrect.currentTime = 0;
       sfxCorrect.play();
@@ -208,7 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
       allOpts.forEach((o) => {
         if (o.textContent === s.correct) o.classList.add("btn-correct");
       });
-      scenarioFeedback.textContent = wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
+      scenarioFeedback.textContent =
+        wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
       scenarioFeedback.className = "scenario-feedback feedback-wrong";
       sfxWrong.currentTime = 0;
       sfxWrong.play();

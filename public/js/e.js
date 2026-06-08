@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "vit", name: "Vịt", img: "duck.jpg" },
     { id: "ca", name: "Cá", img: "fish.jpg" },
     { id: "chim", name: "Chim", img: "bird.jpg" },
-    { id: "trau", name: "Trâu", img: null, emoji: "🐃" },
+    { id: "trau", name: "Trâu", img: "buffalo.jpg" },
     { id: "bo", name: "Bò", img: "cow.jpg" },
     { id: "lon", name: "Lợn", img: "pig.jpg" },
-    { id: "kien", name: "Kiến", img: null, emoji: "🐜" }
+    { id: "kien", name: "Kiến", img: "ant.jpg" }
   ];
 
   let currentIdx = 0;

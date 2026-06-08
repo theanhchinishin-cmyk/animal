@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "cong",
       name: "Con Công",
-      emoji: "🦚",
+      img: "peacock.jpg",
       part: "đuôi",
       question: "Bộ phận nào nổi bật nhất của con công?",
       options: ["đuôi", "mỏ", "cánh", "chân"]
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "huou",
       name: "Con Hươu",
-      emoji: "🦌",
+      img: "deer.jpg",
       part: "chân",
       question: "Bộ phận nào giúp con hươu chạy nhanh?",
       options: ["chân", "sừng", "đuôi", "tai"]
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "ca",
       name: "Con Cá",
-      emoji: "🐟",
+      img: "fish.jpg",
       part: "vây",
       question: "Bộ phận nào giúp con cá bơi?",
       options: ["vây", "đuôi", "mang", "mắt"]
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "cua",
       name: "Con Cua",
-      emoji: "🦀",
+      img: "crab.jpg",
       part: "càng",
       question: "Bộ phận nào đặc biệt nhất của con cua?",
       options: ["càng", "chân", "mai", "mắt"]
@@ -89,7 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const q = quizData[currentIdx];
     currentQSpan.textContent = currentIdx + 1;
     totalQSpan.textContent = quizData.length;
-    animalEmoji.textContent = q.emoji;
+    animalEmoji.src = "/images/" + q.img;
+    animalEmoji.alt = q.name;
     animalName.textContent = q.name;
     questionText.textContent = q.question;
     updateDots();

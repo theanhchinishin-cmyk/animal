@@ -24,7 +24,9 @@
         padding: 30px;
         text-align: center;
         border: 5px solid #cbd5e1;
-        box-shadow: 0 12px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.05);
+        box-shadow:
+          0 12px 0 #cbd5e1,
+          0 20px 30px rgba(0, 0, 0, 0.05);
         margin-bottom: 25px;
       }
       .question-area img {
@@ -33,7 +35,7 @@
         object-fit: cover;
         border-radius: 25px;
         border: 6px solid #ffe66d;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         margin-bottom: 15px;
       }
       .question-area .emoji-big {
@@ -54,15 +56,21 @@
         margin-bottom: 20px;
       }
       .progress-bar .dot {
-        width: 18px; height: 18px; border-radius: 50%;
-        background: #e2e8f0; border: 3px solid #cbd5e1;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #e2e8f0;
+        border: 3px solid #cbd5e1;
         transition: all 0.2s;
       }
       .progress-bar .dot.active {
-        background: #ffe0b5; border-color: #c9924b; transform: scale(1.2);
+        background: #ffe0b5;
+        border-color: #c9924b;
+        transform: scale(1.2);
       }
       .progress-bar .dot.completed {
-        background: #4cd137; border-color: #3bad29;
+        background: #4cd137;
+        border-color: #3bad29;
       }
       .options-grid {
         display: grid;
@@ -82,7 +90,9 @@
         transition: 0.08s linear;
         color: #714623;
       }
-      .option-item:active { transform: scale(0.96); }
+      .option-item:active {
+        transform: scale(0.96);
+      }
       .option-item.btn-correct {
         background: #c8e6b5 !important;
         border-color: #6f9e3f !important;
@@ -93,7 +103,10 @@
         border-color: #e16363 !important;
         color: #8b1a1a;
       }
-      .option-item.disabled { pointer-events: none; opacity: 0.7; }
+      .option-item.disabled {
+        pointer-events: none;
+        opacity: 0.7;
+      }
       .feedback {
         text-align: center;
         font-weight: 800;
@@ -102,8 +115,14 @@
         padding: 15px;
         border-radius: 20px;
       }
-      .correct-fb { color: #2e7d32; background: #e8f5e9; }
-      .wrong-fb { color: #c62828; background: #ffebee; }
+      .correct-fb {
+        color: #2e7d32;
+        background: #e8f5e9;
+      }
+      .wrong-fb {
+        color: #c62828;
+        background: #ffebee;
+      }
       .next-btn {
         display: block;
         margin: 0 auto;
@@ -116,20 +135,39 @@
         border: none;
         border-radius: 50px;
         cursor: pointer;
-        box-shadow: 0 6px 0 #cc4141, 0 10px 20px rgba(255,82,82,0.25);
+        box-shadow:
+          0 6px 0 #cc4141,
+          0 10px 20px rgba(255, 82, 82, 0.25);
         transition: all 0.2s;
       }
       .next-btn:active {
         transform: translateY(4px);
-        box-shadow: 0 2px 0 #cc4141, 0 5px 10px rgba(255,82,82,0.35);
+        box-shadow:
+          0 2px 0 #cc4141,
+          0 5px 10px rgba(255, 82, 82, 0.35);
       }
-      .hidden { display: none !important; }
+      .hidden {
+        display: none !important;
+      }
       @media (max-width: 576px) {
-        .question-area { padding: 20px 15px; }
-        .question-area img { width: 150px; height: 150px; }
-        .question-area .emoji-big { font-size: 4rem; }
-        .options-grid { grid-template-columns: 1fr; gap: 12px; }
-        .option-item { padding: 14px; font-size: 1.2rem; }
+        .question-area {
+          padding: 20px 15px;
+        }
+        .question-area img {
+          width: 150px;
+          height: 150px;
+        }
+        .question-area .emoji-big {
+          font-size: 4rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .option-item {
+          padding: 14px;
+          font-size: 1.2rem;
+        }
       }
     </style>
   </head>
@@ -139,7 +177,7 @@
 
     <div class="game-container">
       <header class="game-internal-header">
-        <h1>🐾 Xem Hình Gọi Tên Con Vật</h1>
+        <h1 style="color: #f2b779">🐾 Xem Hình Gọi Tên Con Vật</h1>
         <p>Bé hãy nhìn hình và chọn đúng tên con vật nhé!</p>
       </header>
 

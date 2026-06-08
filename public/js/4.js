@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let selectedEmoji = "🐱";
+  let selectedImg = "cat.jpg";
   let correctAnswersClicked = 0;
   let totalPinnedCount = 0;
   const totalCorrectNeeded = 2;
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     opt.addEventListener("click", function () {
       document.querySelector(".emoji-opt.active").classList.remove("active");
       this.classList.add("active");
-      selectedEmoji = this.dataset.emoji;
+      selectedImg = this.dataset.img;
     });
   });
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const note = document.createElement("div");
     note.className = "sticky-note";
     note.innerHTML = `
-            <div class="note-head">${selectedEmoji}</div>
+            <div class="note-head"><img src="/images/${selectedImg}" alt="Thú cưng" style="width:40px;height:40px;object-fit:cover;border-radius:8px;"></div>
             <div class="note-body">
                 Nhà bạn <strong style="color:#e67e22;">${name}</strong> nuôi bạn tên là <strong style="color:#2ecc71;">${petName}</strong>, bạn ấy ${habit}!
             </div>

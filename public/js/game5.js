@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const quizData = [
     {
-      emoji: "🐭",
+      img: "mouse.jpg",
       name: "Con Chuột",
       harm: "Cắn phá đồ đạc, làm bẩn thức ăn",
       options: [
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     {
-      emoji: "🪳",
+      img: "cockroach.jpg",
       name: "Con Gián",
       harm: "Gây mất vệ sinh",
       options: [
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     {
-      emoji: "🪰",
+      img: "fly.jpg",
       name: "Con Ruồi",
       harm: "Đậu vào thức ăn, truyền bệnh",
       options: [
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     {
-      emoji: "🦟",
+      img: "mosquito.jpg",
       name: "Con Muỗi",
       harm: "Đốt người, truyền bệnh",
       options: [
@@ -100,7 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const q = quizData[currentIdx];
     currentQSpan.textContent = currentIdx + 1;
     totalQSpan.textContent = quizData.length;
-    animalEmoji.textContent = q.emoji;
+    animalEmoji.src = "/images/" + q.img;
+    animalEmoji.alt = q.name;
     animalName.textContent = q.name;
     updateDots();
 

@@ -22,34 +22,30 @@
 
     <div class="main-container">
       <header>
-        <div class="score-board">⭐ <span id="score-count">0</span></div>
+        <div class="score-board">⭐ <span id="score-count">0</span>/<span id="total-items">10</span></div>
         <h1>📦 Xếp Con Vật Theo Lợi Ích</h1>
-        <p class="sub-title">Con hãy chọn lợi ích đúng của mỗi con vật nhé!</p>
+        <p class="sub-title">Kéo thả các con vật vào đúng ô lợi ích nhé!</p>
       </header>
 
-      <div class="progress-section">
-        <span class="progress-text">Câu <span id="current-q">1</span>/<span id="total-q">10</span></span>
-        <div class="progress-dots" id="progress-dots"></div>
+      <div class="drag-instruction">
+        👆 Kéo con vật phía dưới thả vào ô tương ứng
       </div>
 
-      <div class="animal-display">
-        <span class="animal-emoji" id="animal-emoji">🐟</span>
-        <div class="animal-name" id="animal-name">Con Cá</div>
-      </div>
+      <div class="section-label">🐾 Các con vật</div>
+      <div class="draggable-area" id="draggable-area"></div>
 
-      <div class="question-text">Con vật này có lợi ích gì?</div>
-
-      <div class="options-grid" id="options-grid"></div>
+      <div class="section-label">🎯 Lợi ích</div>
+      <div class="drop-zones" id="drop-zones"></div>
 
       <div class="feedback hidden" id="feedback"></div>
 
-      <button class="next-btn hidden" id="next-btn">Câu tiếp theo ➡️</button>
+      <button class="reset-btn" id="reset-btn">🔄 Chơi lại</button>
     </div>
 
     <div class="victory-modal" id="victory-modal">
       <div class="modal-content">
         <h2>🎉 Con thật giỏi! 🎉</h2>
-        <p>Con đã biết lợi ích của tất cả các con vật!</p>
+        <p>Con đã xếp đúng tất cả các con vật vào đúng lợi ích!</p>
         <button class="restart-btn" id="restart-btn">Chơi lại từ đầu</button>
       </div>
     </div>

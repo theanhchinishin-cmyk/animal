@@ -3,35 +3,35 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "ong",
       name: "Con Ong",
-      emoji: "🐝",
+      img: "bee.jpg",
       part: "cánh",
       options: ["cánh", "chân", "râu", "mắt"]
     },
     {
       id: "ech",
       name: "Con Ếch",
-      emoji: "🐸",
+      img: "frog.jpg",
       part: "chân",
       options: ["chân", "cánh", "miệng", "da"]
     },
     {
       id: "ca",
       name: "Con Cá",
-      emoji: "🐟",
+      img: "fish.jpg",
       part: "vây và đuôi",
       options: ["vây và đuôi", "chân", "mang", "mắt"]
     },
     {
       id: "tom",
       name: "Con Tôm",
-      emoji: "🦐",
+      img: "shrimp.jpg",
       part: "chân và đuôi",
       options: ["chân và đuôi", "càng", "râu", "cánh"]
     },
     {
       id: "chim",
       name: "Con Chim",
-      emoji: "🐦",
+      img: "bird.jpg",
       part: "cánh",
       options: ["cánh", "chân", "mỏ", "đuôi"]
     }
@@ -91,7 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const q = quizData[currentIdx];
     currentQSpan.textContent = currentIdx + 1;
     totalQSpan.textContent = quizData.length;
-    animalEmoji.textContent = q.emoji;
+    animalEmoji.src = "/images/" + q.img;
+    animalEmoji.alt = q.name;
     animalName.textContent = q.name;
     updateDots();
 
