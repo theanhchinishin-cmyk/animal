@@ -133,9 +133,9 @@ header p {
   align-items: center;
   cursor: pointer;
   transition: var(--transition);
-  border: 4px solid #e2e8f0;
+  border: 4px solid #b15e31;
   box-shadow:
-    0 10px 0 #e2e8f0,
+    0 10px 0 #b15e31,
     0 15px 30px rgba(0, 0, 0, 0.04);
 }
 
